@@ -154,7 +154,7 @@ The `PAIRING_ID` check still applies, so you get both address- and ID-level filt
 
 ## Security
 
-**This is a reminder, not a security device.** It tells you a door got left open — e.g. the chicken coop is still open at dusk. It is **not** an alarm, an intrusion sensor, or a safety interlock, and nothing here should be relied on where a missed or wrong reading has real consequences.
+**This is a reminder, not a security device.** It tells you a door got left open. It is **not** an alarm, an intrusion sensor, or a safety interlock, and nothing here should be relied on where a missed or wrong reading has real consequences.
 
 **The radio link is not secured.** The boards talk over **ESP-NOW** with encryption **off**, using broadcast packets tagged with a 1-byte `PAIRING_ID`. That ID just keeps two nearby pairs from mixing signals — it's **not** a password. Anyone within radio range (up to a couple hundred metres line-of-sight) with a cheap ESP32 could **sniff** the door state, **spoof** packets to force the display to OPEN or CLOSED, or **jam** the 2.4 GHz band so nothing gets through.
 
