@@ -152,6 +152,20 @@ The `PAIRING_ID` check still applies, so you get both address- and ID-level filt
 
 ---
 
+## Security
+
+**This is a reminder, not a security device.** It tells you a door got left open — e.g. the chicken coop is still open at dusk. It is **not** an alarm, an intrusion sensor, or a safety interlock, and nothing here should be relied on where a missed or wrong reading has real consequences.
+
+**The radio link is not secured.** The boards talk over **ESP-NOW** with encryption **off**, using broadcast packets tagged with a 1-byte `PAIRING_ID`. That ID just keeps two nearby pairs from mixing signals — it's **not** a password. Anyone within radio range (up to a couple hundred metres line-of-sight) with a cheap ESP32 could **sniff** the door state, **spoof** packets to force the display to OPEN or CLOSED, or **jam** the 2.4 GHz band so nothing gets through.
+
+**What's in its favor:** it's fully **local** — no Wi-Fi network, no cloud, no app, no account, no stored credentials. Nothing is internet-facing and no data leaves your property, so the attack surface is "someone physically in RF range," not the whole internet.
+
+**If you want it hardened** (still a hobby reminder, mind you): ESP-NOW supports AES-CCM encryption with a shared key (`peer.encrypt = true` + a PMK/LMK, which means moving from broadcast to unicast pairing), and you can lock to specific board MACs (see above) — though MAC filtering is trivially spoofable and isn't real authentication.
+
+**Use at your own risk.** Hobby firmware, provided as-is under the MIT license, with no warranty and no security guarantees. Don't deploy it anywhere a missed, delayed, or forged door signal could cause loss, injury, or a breach.
+
+---
+
 ## Troubleshooting
 
 - **LEDs stay red (never pair):** confirm the **same `PAIRING_ID` and `WIFI_CHANNEL`** on both boards, both powered, and in range. Don't connect either board to a Wi-Fi network in code.
