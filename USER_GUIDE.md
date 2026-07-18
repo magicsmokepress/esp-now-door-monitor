@@ -48,6 +48,8 @@ Once in a while at power‑up, **only the red power light** comes on — the Com
 
 This is a start‑up glitch: a brief voltage dip as the unit powers on stops it from booting.
 
+**Firmware v1.1 fixes this in almost all cases** — it turns off the chip's brownout detector before the radio powers up, so the power-on dip no longer resets the board. If you still see it on a very weak supply, the steps below still apply.
+
 **Fix:** unplug Unit 1, wait a couple of seconds, and plug it back in. It will start normally.
 
 **How to recognize it:** on a good start you'll see the Comm light (red → green) and the green Door light within a second or two. If **only** the red power light is lit and nothing else ever happens, do the unplug / re‑plug.

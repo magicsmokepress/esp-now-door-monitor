@@ -21,8 +21,10 @@
 #include <WiFi.h>
 #include <esp_now.h>
 #include <esp_wifi.h>
+#include "soc/soc.h"            // WRITE_PERI_REG
+#include "soc/rtc_cntl_reg.h"  // RTC_CNTL_BROWN_OUT_REG
 
-#define FW_VERSION "1.0"
+#define FW_VERSION "1.1"
 
 // ----------------------------- USER CONFIG -----------------------------
 #define PAIRING_ID            0x42   // MUST match Board 2. Change both to run multiple pairs nearby.
@@ -95,6 +97,13 @@ void onDataRecv(const uint8_t *mac, const uint8_t *data, int len) {
 }
 
 void setup() {
+  // Brownout fix: disable the detector before the WiFi radio powers up, so the
+  // power-on current dip can't reset the board mid-boot (the "only red LED, does
+  // nothing" symptom in USER_GUIDE). Blunt — it turns off low-voltage protection;
+  // ponytail: a bulk cap on 3V3 is the proper hardware fix, this makes marginal
+  // supplies (thin cable / weak charger) start reliably without one.
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+
   Serial.begin(115200);
   delay(200);
   pinMode(REED_PIN, INPUT_PULLUP);
