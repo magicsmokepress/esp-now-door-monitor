@@ -27,6 +27,8 @@
 #include <esp_wifi.h>
 #include <Arduino_GFX_Library.h>
 
+#define FW_VERSION "1.0"
+
 // Screen states (declared before any function for the .ino auto-prototypes)
 enum ScreenState { S_BOOT, S_CLOSED, S_OPEN, S_ERROR };
 
@@ -228,7 +230,7 @@ void setup() {
   peer.encrypt = false;
   esp_now_add_peer(&peer);
 
-  Serial.print("Door DISPLAY ready (ESP32-C3). This board's MAC: ");
+  Serial.print("Door DISPLAY v" FW_VERSION " ready (ESP32-C3). This board's MAC: ");
   Serial.println(WiFi.macAddress());
 }
 

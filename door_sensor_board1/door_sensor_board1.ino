@@ -22,6 +22,8 @@
 #include <esp_now.h>
 #include <esp_wifi.h>
 
+#define FW_VERSION "1.0"
+
 // ----------------------------- USER CONFIG -----------------------------
 #define PAIRING_ID            0x42   // MUST match Board 2. Change both to run multiple pairs nearby.
 #define REED_PIN              4      // reed switch: one leg here, other leg to GND (internal pullup used)
@@ -117,7 +119,7 @@ void setup() {
   peer.encrypt = false;
   esp_now_add_peer(&peer);
 
-  Serial.print("Door SENSOR ready. This board's MAC: ");
+  Serial.print("Door SENSOR v" FW_VERSION " ready. This board's MAC: ");
   Serial.println(WiFi.macAddress());
   Serial.println("Broadcasting door state via ESP-NOW.");
 }
