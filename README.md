@@ -174,3 +174,15 @@ The `PAIRING_ID` check still applies, so you get both address- and ID-level filt
 - **Display rotated wrong:** change `LCD_ROTATION` near the top of `door_display_board2` (0/1/2/3 = 0/90/180/270°; **2 = flipped upside down**).
 - **No Serial output:** set *USB CDC On Boot = Enabled*, or use the **UART** port.
 - **Won't upload:** hold **BOOT**, tap **RESET**, release BOOT, then upload.
+
+## Prior Art
+
+ESP-NOW door/window sensors and ESP-NOW sensor→display pairs are well-trodden
+ground; this project's contribution is the specific no-WiFi/no-app packaging (a
+reed-switch sender + a round-LCD display that glows red until the door is shut),
+not a new technique.
+
+- **[ESP-NOW-Window-Door-Sensor](https://github.com/aZholtikov/ESP-NOW-Window-Door-Sensor)** (aZholtikov) — battery door/window open-closed sensors reporting status over ESP-NOW. *Closest concept match (gateway-oriented).*
+- **[ESP-Now-Sensor-system-with-WiFi](https://github.com/jonasbystrom/ESP-Now-Sensor-system-with-WiFi)** — low-power ESP-NOW battery sensors → gateway. *Adjacent low-power pattern.*
+- **[esp32_door_sensor_reed_switch](https://github.com/pantaluna/esp32_door_sensor_reed_switch)** — ESP32 + reed-switch door sensor (ESP-IDF). *Adjacent (no ESP-NOW, no paired display).*
+- RandomNerdTutorials — [Getting Started with ESP-NOW](https://randomnerdtutorials.com/esp-now-esp32-arduino-ide/), [Two-Way Communication](https://randomnerdtutorials.com/esp-now-two-way-communication-esp32/), and [ESP-NOW → display board](https://randomnerdtutorials.com/esp32-cyd-esp-now-receive-data/). *Foundational tutorials the point-to-point sensor+display pattern builds on.*
